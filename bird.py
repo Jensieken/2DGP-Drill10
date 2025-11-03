@@ -86,8 +86,8 @@ class Run:
 
 class Bird:
     def __init__(self):
-        self.x, self.y = 800 // 2, 90
-        self.image = load_image('bird100x100x4.png')
+        self.x, self.y = 400, 90
+        self.image = load_image('bird_animation.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.frame = 0
         self.face_dir = 1
