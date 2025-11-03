@@ -98,4 +98,14 @@ class Bird:
             }
         )
 
+    def update(self):
+        self.state_machine.update()
+
+
+    def handle_event(self, event):
+        self.state_machine.handle_state_event(('INPUT', event))
+
+
+    def draw(self):
+        self.state_machine.draw()
 
