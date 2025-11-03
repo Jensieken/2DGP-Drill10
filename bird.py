@@ -73,7 +73,7 @@ class Run:
         pass
 
     def do(self):
-        self.bird.frame = (self.bird.frame + 1) % 8
+        self.bird.frame = (self.bird.frame + 1) % 5
         self.bird.x += self.bird.dir * RUN_SPEED_PPS * game_framework.frame_time
 
     def draw(self):
