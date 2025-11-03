@@ -48,7 +48,7 @@ class Idle:
         else: # face_dir == -1: # left
             self.bird.image.clip_draw(self.bird.frame * 100, 200, 100, 100, self.bird.x, self.bird.y)
 
-class Fly:
+class Run:
     def __init__(self, bird):
         self.bird = bird
 
