@@ -1,12 +1,9 @@
 from pico2d import load_image, get_time, load_font
-from sdl2 import SDL_KEYDOWN, SDLK_SPACE, SDLK_RIGHT, SDL_KEYUP, SDLK_LEFT
+from sdl2 import SDL_KEYDOWN, SDLK_RIGHT, SDL_KEYUP, SDLK_LEFT
 
 import game_world
 import game_framework
 from state_machine import StateMachine
-
-def right_down(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_RIGHT
 
 time_out = lambda e: e[0] == 'TIMEOUT'
 
@@ -53,9 +50,9 @@ class Idle:
 
     def draw(self):
         if self.bird.face_dir == 1: # right
-            self.bird.image.clip_draw(self.bird.frame * 183, 168 * 3, 183, 168, self.bird.x, self.bird.y)
+            self.bird.image.clip_draw(int(self.bird.frame) * 183, 168 * 3, 183, 168, self.bird.x, self.bird.y)
         else: # face_dir == -1: # left
-            self.bird.image.clip_composite_draw(self.bird.frame * 183, 168 * 3, 183, 168,
+            self.bird.image.clip_composite_draw(int(self.bird.frame) * 183, 168 * 3, 183, 168,
                                                 0, 'h', self.bird.x, self.bird.y, 183, 168)
 
 class Run:
