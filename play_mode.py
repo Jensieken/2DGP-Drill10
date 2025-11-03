@@ -10,9 +10,14 @@ bird = None
 def handle_events():
 
 def init():
+    global bird
+
+    running = True
+    bird = Bird()
+    game_world.add_object(bird, 1)
 
 def update():
-
+    game_world.update()
 
 def draw():
     clear_canvas()
