@@ -43,7 +43,7 @@ class Idle:
         pass
 
     def do(self):
-        self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 14
         if get_time() - self.bird.wait_time > 3:
             self.bird.state_machine.handle_state_event(('TIMEOUT', None))
 
@@ -74,7 +74,7 @@ class Run:
         pass
 
     def do(self):
-        self.bird.frame = (self.bird.frame + 1) % 8
+        self.bird.frame = (self.bird.frame + 1) % 14
         self.bird.x += self.bird.dir * RUN_SPEED_PPS * game_framework.frame_time
 
     def draw(self):

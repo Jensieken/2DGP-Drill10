@@ -21,7 +21,7 @@ def handle_events():
 
 def init():
     global bird
-
+    global running
     running = True
     bird = Bird()
     game_world.add_object(bird, 1)
