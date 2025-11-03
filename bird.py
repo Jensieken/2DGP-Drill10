@@ -5,7 +5,6 @@ import game_world
 import game_framework
 from state_machine import StateMachine
 
-time_out = lambda e: e[0] == 'TIMEOUT'
 
 def right_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_RIGHT
@@ -50,10 +49,10 @@ class Idle:
 
     def draw(self):
         if self.bird.face_dir == 1: # right
-            self.bird.image.clip_draw(int(self.bird.frame) * 183, 168 * 3, 183, 168, self.bird.x, self.bird.y)
+            self.bird.image.clip_draw(int(self.bird.frame) * 100, 300, 100, 300, self.bird.x, self.bird.y)
         else: # face_dir == -1: # left
-            self.bird.image.clip_composite_draw(int(self.bird.frame) * 183, 168 * 3, 183, 168,
-                                                0, 'h', self.bird.x, self.bird.y, 183, 168)
+            self.bird.image.clip_composite_draw(int(self.bird.frame) * 100, 300, 100, 300,
+                                                0, 'h', self.bird.x, self.bird.y, 100, 300)
 
 class Run:
     def __init__(self, bird):
@@ -62,8 +61,10 @@ class Run:
     def enter(self, e):
         if right_down(e):
             self.bird.dir += 1
+            self.bird.face_dir = 1
         elif left_down(e):
             self.bird.dir -= 1
+            self.bird.face_dir = -1
         elif right_up(e):
             self.bird.dir -= 1
         elif left_up(e):
@@ -73,14 +74,15 @@ class Run:
         pass
 
     def do(self):
-        self.bird.frame = (self.bird.frame + 1) % 5
+        self.bird.frame = (self.bird.frame + 1) % 8
         self.bird.x += self.bird.dir * RUN_SPEED_PPS * game_framework.frame_time
 
     def draw(self):
         if self.bird.face_dir == 1: # right
-            self.bird.image.clip_draw(self.bird.frame * 100, 100, 100, 100, self.bird.x, self.bird.y)
+            self.bird.image.clip_draw(int(self.bird.frame) * 100, 300, 100, 300, self.bird.x, self.bird.y)
         else: # face_dir == -1: # left
-            self.bird.image.clip_draw(self.bird.frame * 100, 0, 100, 100, self.bird.x, self.bird.y)
+            self.bird.image.clip_composite_draw(int(self.bird.frame) * 100, 300, 100, 300,
+                                                0, 'h', self.bird.x, self.bird.y, 100, 300)
 
 class Bird:
     def __init__(self):
