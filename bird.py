@@ -31,6 +31,10 @@ RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
+TIME_PER_ACTION = 0.5
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 8
+
 class Idle:
     def __init__(self, bird):
         self.bird = bird
@@ -43,7 +47,7 @@ class Idle:
         pass
 
     def do(self):
-        self.bird.frame = (self.bird.frame + 1) % 8
+        self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         if get_time() - self.bird.wait_time > 3:
             self.bird.state_machine.handle_state_event(('TIMEOUT', None))
 
