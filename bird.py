@@ -27,6 +27,26 @@ def left_up(e):
 
 
 class Idle:
+    def __init__(self, bird):
+        self.bird = bird
+
+    def enter(self, e):
+        self.bird.wait_time = get_time()
+        self.bird.dir = 0
+
+    def exit(self, e):
+        pass
+
+    def do(self):
+        self.bird.frame = (self.bird.frame + 1) % 8
+        if get_time() - self.bird.wait_time > 3:
+            self.bird.state_machine.handle_state_event(('TIMEOUT', None))
+
+    def draw(self):
+        if self.bird.face_dir == 1: # right
+            self.bird.image.clip_draw(self.bird.frame * 100, 300, 100, 100, self.bird.x, self.bird.y)
+        else: # face_dir == -1: # left
+            self.bird.image.clip_draw(self.bird.frame * 100, 200, 100, 100, self.bird.x, self.bird.y)
 
 class Fly:
 
