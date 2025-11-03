@@ -53,9 +53,10 @@ class Idle:
 
     def draw(self):
         if self.bird.face_dir == 1: # right
-            self.bird.image.clip_draw(int(self.bird.frame) * 100, 300, 100, 100, self.bird.x, self.bird.y)
+            self.bird.image.clip_draw(self.bird.frame * 183, 168 * 3, 183, 168, self.bird.x, self.bird.y)
         else: # face_dir == -1: # left
-            self.bird.image.clip_draw(int(self.bird.frame) * 100, 200, 100, 100, self.bird.x, self.bird.y)
+            self.bird.image.clip_composite_draw(self.bird.frame * 183, 168 * 3, 183, 168,
+                                                0, 'h', self.bird.x, self.bird.y, 183, 168)
 
 class Run:
     def __init__(self, bird):
@@ -86,7 +87,7 @@ class Run:
 
 class Bird:
     def __init__(self):
-        self.x, self.y = 400, 90
+        self.x, self.y = 400, 300
         self.image = load_image('bird_animation.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.frame = 0
