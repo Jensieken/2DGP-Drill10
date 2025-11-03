@@ -8,6 +8,16 @@ import game_framework
 bird = None
 
 def handle_events():
+    global runnung
+
+    event_list = get_events()
+    for event in event_list:
+        if event.type == SDL_QUIT:
+            game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            game_framework.quit()
+        else:
+            bird.handle_event(event)
 
 def init():
     global bird
