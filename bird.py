@@ -75,7 +75,10 @@ class Run:
         self.bird.x += self.bird.dir * RUN_SPEED_PPS * game_framework.frame_time
 
     def draw(self):
-
+        if self.bird.face_dir == 1: # right
+            self.bird.image.clip_draw(self.bird.frame * 100, 100, 100, 100, self.bird.x, self.bird.y)
+        else: # face_dir == -1: # left
+            self.bird.image.clip_draw(self.bird.frame * 100, 0, 100, 100, self.bird.x, self.bird.y)
 
 class Bird:
     def __init__(self):
