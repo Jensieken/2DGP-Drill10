@@ -49,6 +49,27 @@ class Idle:
             self.bird.image.clip_draw(self.bird.frame * 100, 200, 100, 100, self.bird.x, self.bird.y)
 
 class Fly:
+    def __init__(self, bird):
+        self.bird = bird
+
+    def enter(self, e):
+        if right_down(e):
+            self.bird.dir += 1
+        elif left_down(e):
+            self.bird.dir -= 1
+        elif right_up(e):
+            self.bird.dir -= 1
+        elif left_up(e):
+            self.bird.dir += 1
+
+    def exit(self, e):
+        pass
+
+    def do(self):
+        pass
+
+    def draw(self):
+
 
 class Bird:
 
