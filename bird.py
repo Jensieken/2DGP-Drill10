@@ -78,4 +78,24 @@ class Run:
 
 
 class Bird:
+    def __init__(self):
+        self.x, self.y = 800 // 2, 90
+        self.image = load_image('bird100x100x4.png')
+        self.font = load_font('ENCR10B.TTF', 16)
+        self.frame = 0
+        self.face_dir = 1
+        self.dir = 0
+
+        self.IDLE = Idle(self)
+        self.RUN = Run(self)
+        self.state_machine = StateMachine(
+            self.IDLE,
+            {
+                self.IDLE: {space_down: self.IDLE, right_down: self.RUN, left_down: self.RUN,
+                            right_up: self.RUN, left_up: self.RUN},
+                self.RUN: {space_down: self.RUN, right_up: self.IDLE, left_up: self.IDLE, right_down: self.IDLE,
+                           left_down: self.IDLE}
+            }
+        )
+
 
